@@ -1,6 +1,7 @@
 <template>
-    <div>PostsView</div>
-    <PostsList/>
+    <div class="post-view">
+        <PostsList/>
+    </div>
 </template>
 
 <script>
@@ -14,4 +15,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

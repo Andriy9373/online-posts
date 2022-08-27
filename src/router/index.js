@@ -6,6 +6,16 @@ const routes = [
     name: 'posts',
     component: () => import('@/views/PostsView')
   },
+  {
+    path: '/:id',
+    name: 'post',
+    component: () => import('@/views/PostView') 
+  },
+  {
+    path: '/create',
+    name: 'create-post',
+    component: () => import('@/views/CreatePostView') 
+  }
 ]
 
 const router = createRouter({

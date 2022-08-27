@@ -9,7 +9,7 @@ const DATABASE = 'mongodb+srv://user:user@vueexpress.shuhjwb.mongodb.net/?retryW
 
 mongoose
     .connect(DATABASE)
-    .then(() => console.log('DB connected'))
+    .then(() => console.log('DB is connected'))
     .catch(error => console.log(error))
 
 //Middleware
@@ -18,10 +18,11 @@ app.use(cors());
 
 //Routes
 app.use('/api/posts', require('./routes/posts/get-posts'));
+app.use('/api/posts', require('./routes/posts/get-single-post'));
 app.use('/api/posts', require('./routes/posts/delete-post'));
 app.use('/api/posts/create', require('./routes/posts/create-post'));
 app.use('/api/contacts', require('./routes/contacts/get-contacts'));
 
 app.listen(PORT, error => {
-    error ? console.log(error) : console.log(`Server is running on port ${PORT}`);
+    error ? (error) : console.log(`Server is running on port ${PORT}`);
 })
