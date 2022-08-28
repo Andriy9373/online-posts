@@ -1,5 +1,5 @@
 <template>
-    <div class="post-view">
+    <div>
         <PostsList/>
     </div>
 </template>

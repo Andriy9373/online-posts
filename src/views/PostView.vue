@@ -3,8 +3,8 @@
         <div class="d-flex justify-content-between card-header">
             <p>{{ post.title }}</p>
         </div>
-        <div class="card-body" @click="openPost(item._id)">
-            <p class="card-text content">{{ post.content }}</p>
+        <div class="card-body">
+            <p class="card-text text">{{ post.content }}</p>
             <p class="card-text author">{{ labels.author }}: {{ post.author }}</p>
             <p class="card-text date">{{ labels.created_at }}: {{ post.createdAt }}</p>
         </div>
@@ -46,14 +46,14 @@ p {
 
 .card {
     max-width: 800px;
-    margin: 0 auto;
     margin-bottom: 30px;
+    margin: 100px auto;
 
     &-header {
         word-break: break-all;
     }
 
-    .content {
+    .text {
         margin-bottom: 20px;
     }
 
@@ -71,6 +71,12 @@ p {
         position: absolute;
         right: 3px;
         bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 850px){
+    .card {
+        margin: 100px 30px;
     }
 }
 </style>

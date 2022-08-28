@@ -45,14 +45,12 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-    // position: absolute;
-    // width: 100%;
-    // bottom: 0;
-    // position: fixed;
-    // left:0px;
-    // bottom:0px;
-    // width:100%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 54px;
     gap: 50px;
+    z-index: 1000;
 
     .contacts {
         display: flex;

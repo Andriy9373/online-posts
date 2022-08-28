@@ -5,7 +5,7 @@ const Post = require('../../models/Post');
 router.get('/', async (req, res) => {
     Post
         .find()
-        .then(posts => res.status(200).send(posts))
+        .then(posts => res.status(200).send(posts.reverse()))
         .catch(error => console.log(error))
 })
 

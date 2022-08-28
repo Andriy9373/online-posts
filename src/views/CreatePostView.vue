@@ -75,8 +75,7 @@ export default {
 @import "bootstrap";
 .form {
     max-width: 800px;
-    margin: 0 auto;
-    margin-bottom: 30px;
+    margin: 100px auto;
 
     .form-control {
         margin: 15px 0;
@@ -85,6 +84,12 @@ export default {
     .btn {
         display: block;
         margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 850px){
+    .form {
+        margin: 100px 30px;
     }
 }
 </style>

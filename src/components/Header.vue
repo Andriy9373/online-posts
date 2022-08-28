@@ -35,8 +35,9 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-    // position: fixed;
-    width: 100%;
+    position: fixed;
+    top: 0;
+    width:100%;
     z-index: 1000;
 
     .form-inline {
