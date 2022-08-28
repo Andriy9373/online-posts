@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Run backend file
+```
+nodemon app.js
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
