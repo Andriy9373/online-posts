@@ -15,6 +15,11 @@ const routes = [
     path: '/create',
     name: 'create-post',
     component: () => import('@/views/CreatePostView') 
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('@/views/404.vue')
   }
 ]
 

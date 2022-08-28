@@ -65,4 +65,10 @@ export default {
         }
     }
 }
+
+@media only screen and (max-width: 360px){
+    .footer {
+        gap: 10px;
+    }
+}
 </style>

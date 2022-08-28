@@ -18,30 +18,30 @@ export default createStore({
     actions: {
         getContacts: () => {
             return new Promise( done => {
-                axios.get( `api/contacts` )
+                axios.get( `/api/contacts` )
                     .then( res => done( res.data ) )
                     .catch( err => done( err ) )
             } )
         },
         getPosts: () => {
             return new Promise( done => {
-                axios.get( `api/posts` )
+                axios.get( `/api/posts` )
                     .then( res => done( res.data ) )
                     .catch( err => done( err ) )
             } )
         },
         getSinglePost: (commit, data) => {
             return new Promise( done => {
-                axios.get( `api/posts/${data.id}` )
+                axios.get( `/api/posts/${data.id}` )
                     .then( res => done( res.data ) )
                     .catch( err => done( err ) )
             } )
         },
         createPost: (commit, data) => {
-            axios.post(`api/posts/create`, data)
+            axios.post(`/api/posts/create`, data)
         },
         deletePost: (commit, id) => {
-            axios.delete(`api/posts/${id}`)
+            axios.delete(`/api/posts/${id}`)
         },
         ADD_ALERT: ({commit, state}, data) => {
             data.id = Date.now();
