@@ -17,11 +17,11 @@ app.use(express.json());
 app.use(cors());
 
 //Routes
-app.use('/api/posts', require('./routes/posts/get-posts'));
-app.use('/api/posts', require('./routes/posts/get-single-post'));
-app.use('/api/posts', require('./routes/posts/delete-post'));
-app.use('/api/posts/create', require('./routes/posts/create-post'));
-app.use('/api/contacts', require('./routes/contacts/get-contacts'));
+app.get('/api/posts', require('./routes/posts/get-posts'));
+app.get('/api/posts/:id', require('./routes/posts/get-single-post'));
+app.delete('/api/posts/:id', require('./routes/posts/delete-post'));
+app.post('/api/posts/create', require('./routes/posts/create-post'));
+app.get('/api/contacts', require('./routes/contacts/get-contacts'));
 
 app.listen(PORT, error => {
     error ? (error) : console.log(`Server is running on port ${PORT}`);

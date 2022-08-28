@@ -1,5 +1,3 @@
-const express = require('express');
-const router = express.Router();
 const Post = require('../../models/Post');
 
 const calculateDate = () => {
@@ -11,8 +9,7 @@ const calculateDate = () => {
   return `${day}/${month}/${date.getFullYear()}`;
 }
 
-//get-list
-router.post('/', async (req, res) => {
+module.exports = async (req, res) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
@@ -22,6 +19,4 @@ router.post('/', async (req, res) => {
   
       const savePost = await post.save();
       res.status(201).json(savePost);
-})
-
-module.exports = router;
+}

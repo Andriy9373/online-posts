@@ -6,7 +6,7 @@
                 <input v-model="title" type="text" class="form-control" :placeholder="`${labels.title}...`">
             </div>
             <div class="form-group">
-                <input v-model="content" type="text" class="form-control" :placeholder="`${labels.content}...`">
+                <textarea v-model="content" type="text" class="form-control" :placeholder="`${labels.content}...`"></textarea>
             </div>
             <div class="form-group">
                 <input v-model="author" type="text" class="form-control" :placeholder="`${labels.author}...`">
