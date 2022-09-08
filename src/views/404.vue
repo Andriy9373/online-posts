@@ -6,7 +6,7 @@
             <p class="lead">
                 {{ labels.page_doesnt_exist }}
               </p>
-            <router-link :to="{name: 'posts'}" class="btn btn-outline">{{ labels.posts }}</router-link>
+            <router-link :to="{name: 'posts'}" class="btn btn-dark">{{ labels.posts }}</router-link>
         </div>
     </div>
 </template>
@@ -31,14 +31,10 @@ export default {
 <style lang="scss" scoped>
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap";
-.btn-outline {
-    background-color: #000000;
-    color: #ffffff;
+@import "@/styles/mixins.scss";
 
-    &:hover {
-        background-color: #f7f7f7;
-        color: #000000;
-        border: 1px solid #000000;
-    }
+.btn-dark {
+    @include button(#000000);
 }
+
 </style>

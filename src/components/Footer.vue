@@ -18,10 +18,10 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 /* import specific icons */
-import { faInstagram, faTelegram, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faTelegram, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 /* add icons to the library */
-library.add(faInstagram, faTelegram, faGithub);
+library.add(faLinkedin, faTelegram, faGithub);
 
 export default {
     name: 'FooterVue',
@@ -66,7 +66,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 360px){
+@media only screen and (max-width: 375px){
     .footer {
         gap: 10px;
     }

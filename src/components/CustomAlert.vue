@@ -36,7 +36,7 @@ p {
 
 .alert-content {
     position: fixed;
-    z-index: 99999999;
+    z-index: 1000;
     top: 30px;
     right: 30px;
     width: 300px;

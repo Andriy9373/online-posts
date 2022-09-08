@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const fileUpload = require("express-fileupload");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ mongoose
 //Middleware
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload({createParentPath: true}));
 
 //Routes
 app.get('/api/posts', require('./routes/posts/get-posts'));

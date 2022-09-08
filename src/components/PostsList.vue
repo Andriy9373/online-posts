@@ -41,7 +41,6 @@ export default {
         },
         deleteMe(event, id) {
             this.deletePost(id);
-            // this.$store.dispatch('deletePost', id)
             this.loadPosts();
             event.stopPropagation();
         },
@@ -67,7 +66,7 @@ p {
     margin-bottom: 0;
 }
 
-.hidden {
+%hidden {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -82,7 +81,7 @@ p {
 
         &-header > p, &-body > p {
             max-width: 95%;
-            @extend .hidden;
+            @extend %hidden;
         }
 
         .delete, &-body {
@@ -98,7 +97,7 @@ p {
             left: 3px;
             bottom: 0;
             max-width: calc(100% - 200px);;
-            @extend .hidden;
+            @extend %hidden;
         }
 
         .date {

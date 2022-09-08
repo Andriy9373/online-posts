@@ -1,36 +1,47 @@
 <template>
-    <div class="card">
-        <div class="d-flex justify-content-between card-header">
-            <p>{{ post.title }}</p>
+    <div v-if="loaded">
+        <div class="post" v-if="post">
+            <img class="image" :src="require(`../../files/${post.image}`)"/>
+            <div class="card">
+                <div class="d-flex justify-content-between card-header">
+                    <p>{{ post.title }}</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text">{{ post.content }}</p>
+                    <p class="card-text author">{{ labels.author }}: {{ post.author }}</p>
+                    <p class="card-text date">{{ labels.created_at }}: {{ post.createdAt }}</p>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <p class="card-text text">{{ post.content }}</p>
-            <p class="card-text author">{{ labels.author }}: {{ post.author }}</p>
-            <p class="card-text date">{{ labels.created_at }}: {{ post.createdAt }}</p>
-        </div>
+        <NotFound v-else/>
     </div>
 </template>
 
 <script>
+import NotFound from '@/views/404.vue';
+
 export default {
     name: 'PostView',
+    components: { NotFound },
     data() {
         return {
             labels: {
                 author: 'Author',
                 created_at: 'Created at'
             },
-            post: {}
+            post: null,
+            loaded: false,
         }
     },
     methods: {
         loadPost() {
             this.$store.dispatch('getSinglePost', {id: this.$route.params.id})
-                .then(res => this.post = res)
+                .then(post => this.post = post)
+                .then(() => this.loaded = true)
                 .catch(error => console.log(error))
         }
     },
-    mounted() {
+    created() {
         this.loadPost();
     }
 }
@@ -44,39 +55,66 @@ p {
     margin-bottom: 0;
 }
 
-.card {
-    max-width: 800px;
-    margin-bottom: 30px;
-    margin: 100px auto;
+.post {
+    margin: 69px 0;
 
-    &-header {
-        word-break: break-all;
+    .image {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 15px;
+        height: 100px;
+        width: 100px;
+        border-radius: 100%;
+        border: 5px solid #d2d2d2;
+        object-fit: cover;
+        object-position: center;
     }
 
-    .text {
-        margin-bottom: 20px;
-    }
+    .card {
+        max-width: 800px;
+        margin: 0 auto;
 
-    .author {
-        position: absolute;
-        left: 3px;
-        bottom: 0;
-        max-width: 70%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        &-header {
+            word-break: break-all;
+        }
 
-    .date {
-        position: absolute;
-        right: 3px;
-        bottom: 0;
+        .text {
+            margin-bottom: 20px;
+        }
+
+        .author {
+            position: absolute;
+            left: 3px;
+            bottom: 0;
+            max-width: 70%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .date {
+            position: absolute;
+            right: 3px;
+            bottom: 0;
+        }
     }
 }
 
 @media only screen and (max-width: 850px){
     .card {
         margin: 100px 30px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .card-text {
+        &.author, &.date {
+            position: static !important;
+        }
+
+        &.author {
+            max-width: 100% !important;
+        }
     }
 }
 </style>

@@ -1,0 +1,15 @@
+@mixin button($color) {
+    &:hover {
+        color: $color;
+        background-color: transparent;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &.active {
+        color: $color;
+        background-color: transparent;
+    }
+}

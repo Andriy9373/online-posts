@@ -3,17 +3,17 @@
         <form class="form-inline">
             <button
                 type="button"
-                :class="[ 'btn btn-outline', { active: $route.name === 'posts' } ]"
-                @click="route1"
+                :class="[ 'btn btn-dark', { active: $route.name === 'posts' } ]"
+                @click="posts_route"
             >
-                Posts
+                {{ labels.posts }}
             </button>
             <button
                 type="button"
-                :class="[ 'btn btn-outline', { active: $route.name === 'create-post' } ]"
-                @click="route2"
+                :class="[ 'btn btn-dark', { active: $route.name === 'create-post' } ]"
+                @click="create_post_route"
             >
-                Create Post
+                {{ labels.create_post }}
             </button>
         </form>
     </nav>
@@ -22,11 +22,19 @@
 <script>
 export default {
     name: 'HeaderVue',
+    data() {
+        return {
+            labels: {
+                posts: 'Posts',
+                create_post: 'Create post'
+            }
+        }
+    },
     methods: {
-        route1() {
+        posts_route() {
             if (this.$route.name !== 'posts') this.$router.push({name: 'posts'});
         },
-        route2() {
+        create_post_route() {
             if (this.$route.name !== 'create-post') this.$router.push({name: 'create-post'});
         }
     }
@@ -34,6 +42,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/mixins.scss";
+
 .header {
     position: fixed;
     top: 0;
@@ -43,22 +53,10 @@ export default {
     .form-inline {
         display: flex;
         gap: 20px;
-
-        .btn-outline {
-            background-color: #000000;
-            color: #ffffff;
-
-            &:hover {
-                background-color: #f7f7f7;
-                color: #000000;
-                border: 1px solid #000000;
-            }
-
-            &.active {
-                background-color: #f7f7f7;
-                color: #000000;
-            }
-        }
     }
+}
+
+.btn-dark, .btn-dark.active {
+    @include button(#000000);
 }
 </style>

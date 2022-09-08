@@ -5,8 +5,7 @@ export default createStore({
     state: {
         alerts: [],
     },
-    getters: {
-    },
+    getters: {},
     mutations: {
         addAlert: ( state, payload ) => {
             state.alerts.push(payload);
@@ -40,8 +39,8 @@ export default createStore({
         createPost: (commit, data) => {
             axios.post(`/api/posts/create`, data)
         },
-        deletePost: (commit, id) => {
-            axios.delete(`/api/posts/${id}`)
+        deletePost: (commit, data) => {
+            axios.delete(`/api/posts/${data.id}`, {data})
         },
         ADD_ALERT: ({commit, state}, data) => {
             data.id = Date.now();
@@ -68,6 +67,5 @@ export default createStore({
             commit('removeAlert', removeMe);
         },
     },
-    modules: {
-    }
+    modules: {}
 })
