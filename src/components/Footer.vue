@@ -51,6 +51,7 @@ export default {
     height: 54px;
     gap: 50px;
     z-index: 1000;
+    user-select: none;
 
     .contacts {
         display: flex;

@@ -16,6 +16,7 @@ mongoose
 
 //Middleware
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'files')));
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload({createParentPath: true}));

@@ -143,6 +143,7 @@ p {
         max-width: 800px;
         margin: 0 auto;
         margin-bottom: 30px;
+        user-select: none;
 
         &-header > p, &-body > p {
             max-width: 90%;

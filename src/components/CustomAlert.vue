@@ -40,6 +40,7 @@ p {
     top: 30px;
     right: 30px;
     width: 300px;
+    user-select: none;
 
     .alert {
         display: flex;

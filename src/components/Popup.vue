@@ -43,6 +43,7 @@ p {
 
 .modal {
     backdrop-filter: blur(2px);
+    user-select: none;
 
     &-header {
         color: #000000;
