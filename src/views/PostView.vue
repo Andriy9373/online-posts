@@ -1,7 +1,7 @@
 <template>
     <div v-if="loaded">
         <div class="post" v-if="post">
-            <img class="image" :src="require(`../../files/${post.image}`)"/>
+            <img class="image" :src="`../../files/${post.image}`"/>
             <div class="card">
                 <div class="d-flex justify-content-between card-header">
                     <p>{{ post.title }}</p>

@@ -32,6 +32,7 @@ export default {
                 create_post: 'Create post',
                 are_needed: 'are needed',
                 is_needed: 'is needed',
+                incorrect_file_format: 'Incorrect file format',
             },
             form: {
                 title: '',
@@ -62,47 +63,23 @@ export default {
                         this.form.author = '';
                         this.form.file = '';
                         this.$refs.fileUpload.value=null;
-                    } else {
+                    } 
+                    else {
                         if (res.errors.length) {
                             let isPlural = null;
                             res.errors.length > 1 ? isPlural = true : isPlural = false;
                             this.ADD_ALERT({
                                 type: 'danger',
-                                message: `${res.errors.join(", ")} ${isPlural ? this.labels.are_needed : this.labels.is_needed}`
-                            })
-                        }
-                        else {
-                            this.ADD_ALERT({
-                                type: 'danger',
-                                message: res.error[0]
+                                message: res.errors[0] === 'incorrect_file_format' ?
+                                this.labels[res.errors[0]] :
+                                `${res.errors.join(", ")} ${isPlural ?
+                                this.labels.are_needed : this.labels.is_needed}`
                             })
                         }
                     }
                 } )
                 .catch( err => console.error( err ) );
 
-
-            // else {
-            //     let needed = [];
-            //     const form = JSON.parse(JSON.stringify(this.form));
-            //     Object.entries(form).forEach(([key, value]) => {
-            //         if (key !== 'file' && value === '') needed.push(key);
-            //     });
-            //     if (needed.length) {
-            //         let isPlural = null;
-            //         needed.length > 1 ? isPlural = true : isPlural = false;
-            //         this.ADD_ALERT({
-            //             type: 'danger',
-            //             message: `${needed.join(", ")} ${isPlural ? this.labels.are_needed : this.labels.is_needed}`
-            //         })
-            //     }
-            //     else {
-            //         this.ADD_ALERT({
-            //             type: 'danger',
-            //             message: `${this.labels.file_must_be_one_of_these_extensions}: ${extensions.join(", ")}`
-            //         })
-            //     }
-            // }
             event.preventDefault();
         },
         handleFile(e) {

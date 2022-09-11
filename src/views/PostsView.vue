@@ -24,7 +24,7 @@
                     <p class="delete" @click="deleteMe(item._id, item.image)">&times;</p>
                 </div>
                 <div class="card-body" @click="openPost(item._id)">
-                    <img class="card-text image" :src="require(`../../files/${item.image}`)"/>
+                    <img class="card-text image" :src="`../../files/${item.image}`"/>
                     <p class="card-text content">{{ item.content }}</p>
                     <p class="card-text author">{{ labels.author }}: {{ item.author }}</p>
                     <p class="card-text date">{{ labels.created_at }}: {{ item.createdAt }}</p>

@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
                 sharp(file.data).resize(100, 100, {fit: 'cover'}).toFile("./files/" + fileName);
             }
             else {
-                errors.push('incorrect file format');
+                errors.push('incorrect_file_format');
             }
         }
         else {
@@ -54,11 +54,11 @@ module.exports = async (req, res) => {
         await post.save();
     }
 
-    if (errors.length === 0) res.status(201).send({
+    if (errors.length === 0) res.send({
         success: true,
         message: 'Post was successfully added!'
     });
-    else res.status(200).send({
+    else res.send({
         success: false,
         errors: errors
     })
