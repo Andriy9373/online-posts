@@ -30,10 +30,8 @@ export default {
                 content: 'content',
                 author: 'author',
                 create_post: 'Create post',
-                post_was_successfully_added: 'Post was successfully added!',
                 are_needed: 'are needed',
                 is_needed: 'is needed',
-                file_must_be_one_of_these_extensions: 'File must be one of these extensions',
             },
             form: {
                 title: '',
@@ -46,57 +44,65 @@ export default {
     methods: {
         ...mapActions(['createPost', 'ADD_ALERT']),
         create(event) {
-            const extensions = ['png', 'jpg', 'jpeg', 'svg', 'gif'];
-
             let formData = new FormData();
+            formData.append('title', this.form.title);
+            formData.append('content', this.form.content);
+            formData.append('author', this.form.author);
+            formData.append('file', this.form.file);
 
-            let file_extension = null;
-            if (this.form.file) {
-                const splited_file = this.form.file.name.split('.');
-                file_extension = splited_file[splited_file.length - 1];
-            }
+            this.createPost(formData)
+                .then( res => {
+                    if ( res.success ) {
+                        this.ADD_ALERT({
+                            type: 'success',
+                            message: res.message
+                        })
+                        this.form.title = '';
+                        this.form.content = '';
+                        this.form.author = '';
+                        this.form.file = '';
+                        this.$refs.fileUpload.value=null;
+                    } else {
+                        if (res.errors.length) {
+                            let isPlural = null;
+                            res.errors.length > 1 ? isPlural = true : isPlural = false;
+                            this.ADD_ALERT({
+                                type: 'danger',
+                                message: `${res.errors.join(", ")} ${isPlural ? this.labels.are_needed : this.labels.is_needed}`
+                            })
+                        }
+                        else {
+                            this.ADD_ALERT({
+                                type: 'danger',
+                                message: res.error[0]
+                            })
+                        }
+                    }
+                } )
+                .catch( err => console.error( err ) );
 
-            if (this.form.title &&
-                this.form.content &&
-                this.form.author &&
-                (extensions.includes(file_extension) || file_extension === null)
-            ) {
-                formData.append('title', this.form.title);
-                formData.append('content', this.form.content);
-                formData.append('author', this.form.author);
-                formData.append('file', this.form.file);
-                this.createPost(formData)
-                this.form.title = '';
-                this.form.content = '';
-                this.form.author = '';
-                this.form.file = '';
-                this.$refs.fileUpload.value=null;
-                this.ADD_ALERT({
-                    type: 'success',
-                    message: this.labels.post_was_successfully_added
-                })
-            }
-            else {
-                let needed = [];
-                const form = JSON.parse(JSON.stringify(this.form));
-                Object.entries(form).forEach(([key, value]) => {
-                    if (key !== 'file' && value === '') needed.push(key);
-                });
-                if (needed.length) {
-                    let isPlural = null;
-                    needed.length > 1 ? isPlural = true : isPlural = false;
-                    this.ADD_ALERT({
-                        type: 'danger',
-                        message: `${needed.join(", ")} ${isPlural ? this.labels.are_needed : this.labels.is_needed}`
-                    })
-                }
-                else {
-                    this.ADD_ALERT({
-                        type: 'danger',
-                        message: `${this.labels.file_must_be_one_of_these_extensions}: ${extensions.join(", ")}`
-                    })
-                }
-            }
+
+            // else {
+            //     let needed = [];
+            //     const form = JSON.parse(JSON.stringify(this.form));
+            //     Object.entries(form).forEach(([key, value]) => {
+            //         if (key !== 'file' && value === '') needed.push(key);
+            //     });
+            //     if (needed.length) {
+            //         let isPlural = null;
+            //         needed.length > 1 ? isPlural = true : isPlural = false;
+            //         this.ADD_ALERT({
+            //             type: 'danger',
+            //             message: `${needed.join(", ")} ${isPlural ? this.labels.are_needed : this.labels.is_needed}`
+            //         })
+            //     }
+            //     else {
+            //         this.ADD_ALERT({
+            //             type: 'danger',
+            //             message: `${this.labels.file_must_be_one_of_these_extensions}: ${extensions.join(", ")}`
+            //         })
+            //     }
+            // }
             event.preventDefault();
         },
         handleFile(e) {

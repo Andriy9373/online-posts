@@ -11,21 +11,55 @@ const calculateDate = () => {
 }
 
 module.exports = async (req, res) => {
+    let errors = [];
+
+    // check body values
+    if (!req.body.title) errors.push('title');
+    if (!req.body.content) errors.push('content');
+    if (!req.body.author) errors.push('author');
+
+    // file handler
     let fileName;
-    if (!req.files) fileName = 'incognito.gif';
-    else {
-        let file = req.files.file;
-        fileName = file.name;
-        sharp(file.data).resize(100, 100, {fit: 'cover'}).toFile("./files/" + fileName);
+    if (errors.length === 0) {
+        if (req.files) {
+            const extensions = ['png', 'jpg', 'jpeg', 'svg', 'gif'];
+
+            const file = req.files.file;
+            const splited_file = file.name.split('.');
+            const file_extension = splited_file[splited_file.length - 1];
+
+            if (extensions.includes(file_extension)) {
+                fileName = file.name;
+                sharp(file.data).resize(100, 100, {fit: 'cover'}).toFile("./files/" + fileName);
+            }
+            else {
+                errors.push('incorrect file format');
+            }
+        }
+        else {
+            fileName = 'incognito.gif';
+        }
     }
-    const post = new Post({
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-        image: fileName,
-        createdAt: calculateDate()
+
+    // save post
+    if (errors.length === 0) {
+        const post = new Post({
+            title: req.body.title,
+            content: req.body.content,
+            author: req.body.author,
+            image: fileName,
+            createdAt: calculateDate()
+        });
+
+        await post.save();
+    }
+
+    if (errors.length === 0) res.status(201).send({
+        success: true,
+        message: 'Post was successfully added!'
     });
-  
-    const savePost = await post.save();
-    res.status(201).json(savePost);
+    else res.status(200).send({
+        success: false,
+        errors: errors
+    })
 }

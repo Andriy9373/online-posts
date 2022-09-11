@@ -37,10 +37,18 @@ export default createStore({
             } )
         },
         createPost: (commit, data) => {
-            axios.post(`/api/posts/create`, data)
+            return new Promise( done => {
+                axios.post(`/api/posts/create`, data)
+                    .then( res => done( res.data ) )
+                    .catch( err => done( err ) )
+            } )
         },
         deletePost: (commit, data) => {
-            axios.delete(`/api/posts/${data.id}`, {data})
+            return new Promise( done => {
+                axios.delete(`/api/posts/${data.id}`, {data})
+                    .then( res => done( res.data ) )
+                    .catch( err => done( err ) )
+            } )
         },
         ADD_ALERT: ({commit, state}, data) => {
             data.id = Date.now();
