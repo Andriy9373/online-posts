@@ -111,7 +111,8 @@ export default {
 
 @media only screen and (max-width: 850px){
     .form {
-        margin: 100px 30px;
+        margin-left: 30px;
+        margin-right: 30px;
     }
 }
 </style>

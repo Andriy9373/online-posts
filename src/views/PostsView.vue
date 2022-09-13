@@ -93,12 +93,12 @@ export default {
         },
         deleteCurrentPost() {
             this.deletePost(this.deleteForm);
-            this.loadPosts();
             this.showPopup = false;
             this.ADD_ALERT({
                 type: 'success',
                 message: this.labels.post_was_successfully_deleted
-            })
+            });
+            this.loadPosts();
         },
         openPost(id) {
             this.$router.push({name: 'post', params: {id}});
@@ -196,7 +196,7 @@ p {
 
 @media only screen and (max-width: 850px){
     .block {
-        margin: 100px 30px;
+        margin: 0 30px;
     }
 }
 

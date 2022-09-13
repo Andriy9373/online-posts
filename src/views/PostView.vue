@@ -101,8 +101,9 @@ p {
 }
 
 @media only screen and (max-width: 850px){
-    .card {
-        margin: 100px 30px;
+    .post {
+        margin-left: 30px;
+        margin-right: 30px;
     }
 }
 

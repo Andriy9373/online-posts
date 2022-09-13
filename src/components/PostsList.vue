@@ -107,10 +107,4 @@ p {
         }
     }
 }
-
-@media only screen and (max-width: 850px){
-    .block {
-        margin: 100px 30px;
-    }
-}
 </style>
