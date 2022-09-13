@@ -7,7 +7,7 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const DATABASE = 'mongodb+srv://user:user@vueexpress.shuhjwb.mongodb.net/?retryWrites=true&w=majority';
+const DATABASE = 'mongodb+srv://user:user@online-posts.owuanwk.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose
     .connect(DATABASE)

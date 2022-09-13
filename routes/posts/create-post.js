@@ -25,10 +25,10 @@ module.exports = async (req, res) => {
             const extensions = ['png', 'jpg', 'jpeg', 'svg', 'gif'];
 
             const file = req.files.file;
-            const splited_file = file.name.split('.');
-            const file_extension = splited_file[splited_file.length - 1];
+            const splitedFile = file.name.split('.');
+            const fileExtension = splitedFile[splitedFile.length - 1];
 
-            if (extensions.includes(file_extension)) {
+            if (extensions.includes(fileExtension)) {
                 fileName = file.name;
                 sharp(file.data).resize(100, 100, {fit: 'cover'}).toFile("./files/" + fileName);
             }
